@@ -1,0 +1,6 @@
+bin
+build
+gin-bin
+.idea
+vendor
+__vendor*

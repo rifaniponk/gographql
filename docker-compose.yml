@@ -1,0 +1,13 @@
+version: "3"
+services:
+  bayarin.go:
+    build: .
+    command: gin --immediate --path /go/src/github.com/bayarindevteam/bayaringo go run main.go
+    working_dir: /go/src/github.com/bayarindevteam/bayaringo
+    restart: always
+    volumes:
+      - .:/go/src/github.com/bayarindevteam/bayaringo
+    ports:
+      - 8090:8090
+    environment:
+      - APP_PORT=8090 

@@ -28,7 +28,9 @@ func (r *mutationResolver) RefreshToken(ctx context.Context, input model.Refresh
 }
 
 func (r *queryResolver) Links(ctx context.Context) ([]*model.Link, error) {
-	panic(fmt.Errorf("not implemented"))
+	var links []*model.Link
+	links = append(links, &model.Link{Title: "our dummy link", Address: "https://address.org", User: &model.User{Username: "admin"}})
+	return links, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.

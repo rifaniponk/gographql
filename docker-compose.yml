@@ -2,12 +2,28 @@ version: "3"
 services:
   bayarin.go:
     build: .
-    command: gin --immediate --path /go/src/github.com/bayarindevteam/bayaringo go run main.go
-    working_dir: /go/src/github.com/bayarindevteam/bayaringo
+    command: gin --immediate --path /app go run main.go
+    working_dir: /app
     restart: always
     volumes:
-      - .:/go/src/github.com/bayarindevteam/bayaringo
+      - .:/app
     ports:
-      - 8090:8090
+      - 80:80
     environment:
-      - APP_PORT=8090 
+      - APP_PORT=80 
+      - DB_USER=bayarin
+      - DB_PASSWORD=bayarin
+      - DB_NAME=bayarin
+  bayarin.postgres:
+    image: postgres:12.3
+    environment:
+      POSTGRES_USER: bayarin
+      POSTGRES_PASSWORD: bayarin
+  bayarin.postgres.pgweb:
+    image: sosedoff/pgweb:latest
+    command: ["pgweb", "-s", "--bind=0.0.0.0", "--listen=8080", "--host=bayarin.postgres", "--user=bayarin", "--pass=bayarin", "--db=bayarin", "--ssl=disable"]
+    restart: always
+    ports:
+      - "8070:8080"
+    depends_on:
+      - bayarin.postgres

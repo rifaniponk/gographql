@@ -9,9 +9,20 @@
 docker-compose build && docker-compose up
 ```
 Graphql Playground
-http://localhost:8090/
+http://localhost/
 
 Graphql Query
-http://localhost:8090/query
+http://localhost/query
 
+pgweb
+http://localhost:8070/ 
+
+
+## Generator
+
+gqlgen
+
+## migration
+
+sql-migrate
 

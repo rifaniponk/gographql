@@ -7,12 +7,21 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/bayarindevteam/bayaringo/db"
 	"github.com/bayarindevteam/bayaringo/graph/generated"
 	"github.com/bayarindevteam/bayaringo/graph/model"
 )
 
 func (r *mutationResolver) CreateLink(ctx context.Context, input model.NewLink) (*model.Link, error) {
-	panic(fmt.Errorf("not implemented"))
+	li := model.Link{}
+	li.Address = input.Address
+	li.Title = input.Title
+	linkID, err := db.Store.CreateLink(ctx, &li)
+	if err != nil {
+		panic(fmt.Errorf("errroooor"))
+	}
+	li.ID = linkID
+	return &li, nil
 }
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (string, error) {

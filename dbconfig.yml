@@ -1,3 +1,4 @@
+# DB config for migration
 development:
     dialect: postgres
     datasource: host=bayarin.postgres dbname=${DB_NAME} user=${DB_USER} password=${DB_PASSWORD} sslmode=disable

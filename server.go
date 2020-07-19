@@ -7,6 +7,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/bayarindevteam/bayaringo/db"
 	"github.com/bayarindevteam/bayaringo/graph"
 	"github.com/bayarindevteam/bayaringo/graph/generated"
 )
@@ -17,6 +18,12 @@ func main() {
 	port := os.Getenv("APP_PORT")
 	if port == "" {
 		port = defaultPort
+	}
+
+	// Connect to database
+	err := db.Handle().Init("bayaringo", os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_NAME"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"))
+	if err != nil {
+		log.Fatalf("error initialising database: %s", err)
 	}
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))

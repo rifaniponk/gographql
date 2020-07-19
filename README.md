@@ -5,9 +5,11 @@
 
 ## Getting Started
 
-```github
+```sh
 docker-compose build && docker-compose up
+./go.sh sql-migrate up
 ```
+
 Graphql Playground
 http://localhost/
 
@@ -18,11 +20,20 @@ pgweb
 http://localhost:8070/ 
 
 
-## Generator
+## Graphql Generator
 
-gqlgen
+```sh
+./go.sh gqlgen
+```
 
 ## migration
 
-sql-migrate
+```sh
+./go.sh sql-migrate down      # Undo a database migration
+./go.sh sql-migrate new       # Create a new migration
+./go.sh sql-migrate redo      # Reapply the last migration
+./go.sh sql-migrate skip      # Sets the database level to the most recent version available, without running the migrations
+./go.sh sql-migrate status    # Show migration status
+./go.sh sql-migrate up        # Migrates the database to the most recent version available
+```
 

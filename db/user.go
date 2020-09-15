@@ -8,12 +8,12 @@ import (
 )
 
 // CreateLink ...
-func (d *DatabaseStorage) CreateLink(ctx context.Context, l *model.Link) (string, error) {
+func (d *DatabaseStorage) CreateUser(ctx context.Context, u *model.User) (string, error) {
 	var lastID string
 
-	query := sq.Insert("links").
-		Columns("title", "address", "userid").
-		Values(l.Title, l.Address, "999242e0-4855-44b6-86fb-41fd3b8bc526").
+	query := sq.Insert("users").
+		Columns("name", "username", "email", "password").
+		Values(u.Name, u.Username, u.Password, u.Password).
 		Suffix("RETURNING \"id\"").
 		RunWith(d.db).
 		PlaceholderFormat(sq.Dollar)
